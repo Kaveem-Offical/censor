@@ -5,46 +5,10 @@ app = Flask(__name__)
 
 # Censorship dictionary
 censor_dict = {
-    # General profanity
-    "fuck": "f**k",
-    "shit": "s**t",
-    "ass": "a*s",
-    "bitch": "b***h",
-    "damn": "d**n",
-    "hell": "h**l",
-    "piss": "p**s",
-    "dick": "d**k",
-    "cock": "c**k",
-    "pussy": "p***y",
-    
-    # Sexual terms
-    "sex": "s*x",
-    "nude": "n*de",
-    "naked": "n***d",
-    "orgasm": "o****m",
-    "masturbate": "m********e",
-    
-    # Body parts
-    "penis": "p***s",
-    "vagina": "v****a",
-    "boobs": "b**bs",
-    "breasts": "b*****s",
-    "clitoris": "c******s",
-    "testicles": "t*******s",
-    
-    # Derogatory terms
-    "slut": "s**t",
-    "whore": "w****e",
-    "rape": "r**e",
-    "pedophile": "p*******e",
-    
-    # Slang/variations
-    "fag": "f*g",
-    "dyke": "d**e",
-    "tranny": "t****y",
-    "fucking": "f*****g",
-    "fucker": "f*****r",
-    "sexy": "s**xy",
+    "fuck": "f**k", "shit": "s**t", "ass": "a*s", "bitch": "b***h",
+    "sex": "s*x", "nude": "n*de", "penis": "p***s", "vagina": "v****a",
+    "boobs": "b**bs", "cock": "c**k", "pussy": "p***y", "dick": "d**k",
+    # Add more words as needed
 }
 
 def censor_text(text):
@@ -61,5 +25,6 @@ def censor():
     censored_text = censor_text(original_text)
     return jsonify({"original": original_text, "censored": censored_text})
 
-if __name__ == '__main__':
-    app.run(debug=False)
+# Required for Netlify Functions
+def handler(event, context):
+    return app(event, context)
